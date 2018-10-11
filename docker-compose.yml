@@ -1,0 +1,20 @@
+version: '3'
+services:
+  database:
+    hostname: database
+    build: data/.
+    ports:
+      - "3306:3306"
+    networks:
+      - network
+  webservice:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "database"
+    networks:
+      - network
+networks:
+  network:
+    driver: bridge
